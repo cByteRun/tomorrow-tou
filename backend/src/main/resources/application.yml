@@ -1,0 +1,19 @@
+server:
+  port: ${PORT:${API_PORT:18080}}
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/tou}
+    username: ${DB_USER:tou}
+    password: ${DB_PASSWORD:tou-local}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+tou:
+  demo-seed: ${DEMO_SEED:false}
+  demo-password: ${DEMO_PASSWORD:}

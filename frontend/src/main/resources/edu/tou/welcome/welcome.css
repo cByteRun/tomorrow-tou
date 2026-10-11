@@ -1,0 +1,43 @@
+.welcome { -fx-font-family: 'Manrope'; -fx-background-color: #101614; -fx-padding: 0; }
+.split-pane > .split-pane-divider { -fx-padding: 0 3 0 3; -fx-background-color: #d9ff85; }
+.story-scroll, .story-scroll > .viewport, .story { -fx-background-color: #101614; }
+.story-scroll .scroll-bar:vertical { -fx-pref-width: 7; -fx-background-color: #101614; }
+.story-scroll .scroll-bar .thumb { -fx-background-color: #344735; }
+.chapter { -fx-background-color: radial-gradient(center 40% 55%,radius 70%,#1c2a20,#101614); -fx-padding: 30 48 36 48; }
+.chapter.secondary { -fx-background-color: radial-gradient(center 50% 60%,radius 75%,#1b2b27,#101614); }
+.chapter.third { -fx-background-color: radial-gradient(center 50% 50%,radius 65%,#292b1d,#101614); }
+.story .label { -fx-text-fill: #f2f3eb; }
+.story .brand { -fx-font-size: 21; -fx-font-weight: bold; }
+.story .brand-icon { -fx-text-fill: #d9ff85; -fx-font-size: 29; }
+.story .mono { -fx-font-family: 'IBM Plex Mono'; -fx-font-size: 11; -fx-text-fill: #8e9b92; }
+.story .kicker { -fx-text-fill: #d9ff85; -fx-font-family: 'IBM Plex Mono'; -fx-font-size: 11; }
+.story .headline { -fx-font-size: 57; -fx-font-weight: 500; }
+.story .accent { -fx-text-fill: #d9ff85; }
+.story .lede { -fx-font-size: 14; -fx-text-fill: #aeb9af; -fx-line-spacing: 5; }
+.story .phase { -fx-background-color: #182319; -fx-border-color: #39472c; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8 10; -fx-text-fill: #91a18b; -fx-font-size: 10; }
+.story .phase.active { -fx-background-color: #d9ff85; -fx-text-fill: #23321a; }
+.story .phase.done { -fx-text-fill: #d9ff85; }
+.story .explanation { -fx-font-size: 12; -fx-text-fill: #9caf91; -fx-min-height: 43; }
+.story .button { -fx-background-color: transparent; -fx-text-fill: #b2c6a3; -fx-font-size: 11; }
+.story .separator .line { -fx-border-color: #ffffff19; }
+.login-rail { -fx-background-color: linear-gradient(from 100% 20% to 0% 80%,#dce7c5,#e9ede1); -fx-min-width: 415; }
+.login-rail .label { -fx-text-fill: #20281f; }
+.login-rail .rail-small, .login-rail .hyperlink { -fx-font-size: 11; -fx-text-fill: #707e68; }
+.login-rail .rail-kicker { -fx-font-family: 'IBM Plex Mono'; -fx-text-fill: #6e7b64; -fx-font-size: 10; }
+.login-rail .login-title { -fx-font-size: 38; }
+.login-rail .rail-caption { -fx-font-size: 14; -fx-text-fill: #7b8574; -fx-padding: 0 0 10 0; }
+.roles { -fx-background-color: #d5ddca; -fx-background-radius: 7; -fx-padding: 4; }
+.roles .toggle-button { -fx-background-color: transparent; -fx-text-fill: #6b775f; -fx-font-size: 11; -fx-padding: 10 8; }
+.roles .toggle-button:selected { -fx-background-color: #f8faef; -fx-text-fill: #283321; -fx-background-radius: 4; }
+.login-rail .field-label { -fx-font-size: 12; -fx-text-fill: #5c6b53; -fx-padding: 4 0 0 0; }
+.login-rail .text-field { -fx-background-color: #ffffff50; -fx-border-color: #bdc8ae; -fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 15 12; -fx-font-size: 14; -fx-text-fill: #27351f; -fx-prompt-text-fill: #7b8574; }
+.login-rail .text-field:focused { -fx-border-color: #81ad35; }
+.login-rail .check-box { -fx-font-size: 10; -fx-text-fill: #75826a; }
+.login-rail .submit { -fx-background-color: #24341d; -fx-text-fill: #eff7e8; -fx-padding: 16; -fx-background-radius: 5; -fx-font-size: 14; }
+.login-rail .demo-button { -fx-background-color: transparent; -fx-border-color: #a9b99a; -fx-border-radius: 5; -fx-padding: 13; -fx-font-size: 12; -fx-text-fill: #425936; }
+.login-rail .show-password { -fx-background-color: transparent; -fx-text-fill: #6e7e5e; -fx-font-size: 10; }
+.login-rail .rail-note { -fx-font-size: 10; -fx-text-fill: #829075; }
+.login-rail .login-error { -fx-text-fill: #a93838; -fx-font-size: 11; }
+.login-rail .separator .line { -fx-border-color: #bec9b1; }
+
+.rail-scroll, .rail-scroll > .viewport { -fx-background-color: #e9ede1; }

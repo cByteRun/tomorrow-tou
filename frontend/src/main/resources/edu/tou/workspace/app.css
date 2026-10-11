@@ -1,0 +1,51 @@
+.root { -fx-font-family: 'Inter'; -fx-font-size: 12; -fx-base: #ffffff; -fx-background-color: #f5f7fb; -fx-text-fill: #18243b; }
+.workspace, .content-scroll, .content-scroll > .viewport { -fx-background-color: #f5f7fb; }
+.sidebar, .side-scroll, .side-scroll > .viewport { -fx-background-color: white; }
+.sidebar { -fx-border-color: transparent #eaf0f6 transparent transparent; }
+.brand { -fx-font-size: 19; -fx-font-weight: bold; -fx-text-fill: #5468ef; -fx-padding: 0 10 12 10; }
+.eyebrow, .nav-caption { -fx-text-fill: #a5afbf; -fx-font-size: 9; -fx-font-weight: bold; -fx-padding: 10 12; }
+.nav-item { -fx-background-color: transparent; -fx-text-fill: #7b899f; -fx-padding: 11 13; -fx-alignment: CENTER_LEFT; -fx-background-radius: 11; }
+.nav-item:hover { -fx-background-color: #f6f8ff; -fx-text-fill: #5262df; }
+.nav-item.active { -fx-background-color: #eff1ff; -fx-text-fill: #4d60e5; -fx-font-weight: bold; }
+.topbar { -fx-padding: 22 37; -fx-background-color: white; -fx-border-color: transparent transparent #eaf0f6 transparent; }
+.top-route { -fx-text-fill: #76849b; -fx-font-size: 12; }
+.surface { -fx-background-color: white; -fx-background-radius: 22; -fx-border-color: #e8edf4; -fx-border-radius: 22; -fx-effect: dropshadow(gaussian,#1b315808,15,0,0,6); }
+.label { -fx-text-fill: #18243b; }
+.page-title { -fx-font-size: 30; -fx-font-weight: bold; }
+.section-title { -fx-font-size: 18; -fx-font-weight: bold; }
+.subtle, .muted-mini { -fx-text-fill: #8893a6; -fx-font-size: 11; }
+.field-label { -fx-text-fill: #66758d; -fx-font-size: 12; -fx-font-weight: bold; }
+.user-name { -fx-font-weight: bold; -fx-font-size: 13; }
+.hero { -fx-background-color: linear-gradient(to right,#152543,#233b73,#5167d4); -fx-background-radius: 25; -fx-padding: 34 37; -fx-min-height: 210; }
+.hero .label { -fx-text-fill: white; }
+.hero .hero-title { -fx-font-size: 29; -fx-font-weight: bold; }
+.hero .hero-desc { -fx-text-fill: #c5d3ee; -fx-font-size: 12; }
+.chip { -fx-background-color: #ffffff22; -fx-border-color: #ffffff26; -fx-background-radius: 99; -fx-border-radius: 99; -fx-padding: 7 10; -fx-font-size: 10; }
+.metric { -fx-font-size: 28; -fx-font-weight: bold; }
+.button { -fx-cursor: hand; }
+.btn-primary, .btn-outline, .btn-soft, .btn-danger { -fx-background-radius: 12; -fx-border-radius: 12; -fx-padding: 10 15; -fx-font-size: 12; -fx-font-weight: bold; }
+.btn-primary { -fx-background-color: #5265ee; -fx-text-fill: white; }
+.btn-primary:hover { -fx-background-color: #3f53e3; }
+.btn-outline { -fx-border-color: #e0e7f0; -fx-background-color: white; -fx-text-fill: #34435f; }
+.btn-soft { -fx-background-color: #eef0ff; -fx-text-fill: #5365dd; }
+.btn-danger { -fx-background-color: #fff0f2; -fx-text-fill: #df5365; }
+.text-field, .combo-box, .date-picker { -fx-background-color: white; -fx-border-color: #dde5f0; -fx-border-radius: 12; -fx-background-radius: 12; -fx-padding: 8 11; }
+.text-field:focused, .combo-box:focused { -fx-border-color: #8190ff; }
+.table-view { -fx-background-color: transparent; -fx-border-color: #e8edf4; -fx-border-radius: 12; -fx-padding: 0; }
+.table-view .column-header-background, .table-view .column-header, .table-view .filler { -fx-background-color: #f9fafc; }
+.table-view .column-header { -fx-size: 44; -fx-border-color: transparent transparent #e8edf4 transparent; }
+.table-view .column-header .label { -fx-text-fill: #8c9aae; -fx-font-size: 10; -fx-alignment: CENTER_LEFT; -fx-padding: 0 10; }
+.table-row-cell { -fx-background-color: white; -fx-border-color: transparent transparent #f0f2f6 transparent; }
+.table-row-cell:hover { -fx-background-color: #fcfdff; }
+.table-row-cell:selected { -fx-background-color: #eef0ff; }
+.table-cell { -fx-text-fill: #42506a; -fx-border-color: transparent; -fx-alignment: CENTER_LEFT; -fx-padding: 12 10; }
+.table-row-cell:selected .table-cell { -fx-text-fill: #34435f; }
+.timebox, .calendar-event { -fx-background-color: #f0f3ff; -fx-text-fill: #4b5d99; -fx-background-radius: 10; -fx-padding: 12; }
+.calendar-event { -fx-alignment: CENTER_LEFT; -fx-border-color: transparent transparent transparent #7383ed; -fx-border-width: 0 0 0 3; }
+.calendar-event.cancelled { -fx-background-color: #fff2ef; -fx-text-fill: #c06454; }
+.chart { -fx-background-color: white; }
+.default-color0.chart-bar { -fx-bar-fill: #7786f4; }
+.default-color0.chart-pie { -fx-pie-color: #5e76ec; }.default-color1.chart-pie { -fx-pie-color: #a6b4f5; }.default-color2.chart-pie { -fx-pie-color: #f193a1; }.default-color3.chart-pie { -fx-pie-color: #f6c88c; }
+.inline-error { -fx-text-fill: #d95368; -fx-font-size: 11; }
+.dialog-pane { -fx-background-color: #f5f7fb; }
+.scroll-pane { -fx-background-color: transparent; }.scroll-pane > .viewport { -fx-background-color: transparent; }

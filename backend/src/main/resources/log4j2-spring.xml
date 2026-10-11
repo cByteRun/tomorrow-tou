@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><Configuration><Appenders>
+<Console name="Console"><PatternLayout pattern="%d{HH:mm:ss} %-5level %logger{1} — %msg%n"/></Console>
+<RollingFile name="App" fileName="logs/app.log" filePattern="logs/app-%d{yyyy-MM-dd}-%i.log.gz"><PatternLayout pattern="%d %-5level %logger %msg%n"/><Policies><TimeBasedTriggeringPolicy/><SizeBasedTriggeringPolicy size="10 MB"/></Policies><DefaultRolloverStrategy max="10"/></RollingFile>
+<RollingFile name="Error" fileName="logs/error.log" filePattern="logs/error-%d{yyyy-MM-dd}-%i.log.gz"><ThresholdFilter level="ERROR"/><PatternLayout pattern="%d %-5level %logger %msg%n%throwable"/><Policies><TimeBasedTriggeringPolicy/><SizeBasedTriggeringPolicy size="10 MB"/></Policies></RollingFile>
+<RollingFile name="Audit" fileName="logs/audit.log" filePattern="logs/audit-%d{yyyy-MM-dd}-%i.log.gz"><PatternLayout pattern="%d %msg%n"/><Policies><TimeBasedTriggeringPolicy/><SizeBasedTriggeringPolicy size="10 MB"/></Policies></RollingFile>
+</Appenders><Loggers><Logger name="AUDIT" level="info" additivity="false"><AppenderRef ref="Audit"/></Logger><Root level="info"><AppenderRef ref="Console"/><AppenderRef ref="App"/><AppenderRef ref="Error"/></Root></Loggers></Configuration>

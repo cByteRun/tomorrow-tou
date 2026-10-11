@@ -1,0 +1,233 @@
+// Documentation of V1__schema.sql, not a migration. Product source: docs/TZ.md.
+Project tomorrow_tou {
+  database_type: 'PostgreSQL'
+  Note: '10 required entities, 3 implementation entities and 2 N:M join tables. STUFF is accepted by the API as STAFF; PostgreSQL stores STAFF.'
+}
+
+Table subject {
+  id bigserial [pk, increment, not null]
+  version bigint [not null, default: 0]
+  name varchar(255) [not null]
+  code varchar(255) [not null, unique]
+  credits integer [not null]
+  Note: '''
+  CHECK(credits BETWEEN 1 AND 30)
+  '''
+}
+
+Table teacher {
+  id bigserial [pk, increment, not null]
+  version bigint [not null, default: 0]
+  name varchar(255) [not null]
+  email varchar(255) [not null, unique]
+  department varchar(255) [not null]
+  Note: '''
+  Unique functional index on lower(email); enforced in PostgreSQL, not represented as a plain DBML column index.
+  '''
+}
+
+Table teacher_subject {
+  teacher_id bigint [not null]
+  subject_id bigint [not null]
+  indexes {
+    (teacher_id,subject_id) [pk]
+  }
+}
+
+Table study_group {
+  id bigserial [pk, increment, not null]
+  version bigint [not null, default: 0]
+  name varchar(255) [not null, unique]
+  study_year integer [not null]
+  curator_id bigint [not null]
+  Note: '''
+  CHECK(study_year BETWEEN 1 AND 6)
+  Required Group entity; Java class StudyGroup.
+  '''
+}
+
+Table group_subject {
+  group_id bigint [not null]
+  subject_id bigint [not null]
+  indexes {
+    (group_id,subject_id) [pk]
+  }
+}
+
+Table student {
+  id bigserial [pk, increment, not null]
+  version bigint [not null, default: 0]
+  first_name varchar(255) [not null]
+  last_name varchar(255) [not null]
+  student_no varchar(255) [not null, unique]
+  email varchar(255) [not null, unique]
+  phone varchar(255)
+  group_id bigint [not null]
+  indexes {
+    (group_id) [name: 'student_group']
+  }
+  Note: '''
+  Unique functional index on lower(email); enforced in PostgreSQL, not represented as a plain DBML column index.
+  '''
+}
+
+Table room {
+  id bigserial [pk, increment, not null]
+  version bigint [not null, default: 0]
+  name varchar(255) [not null, unique]
+  building varchar(255) [not null]
+  capacity integer [not null]
+  Note: '''
+  CHECK(capacity BETWEEN 1 AND 1000)
+  '''
+}
+
+Table semester {
+  id bigserial [pk, increment, not null]
+  version bigint [not null, default: 0]
+  name varchar(255) [not null]
+  start_date date [not null]
+  end_date date [not null]
+  status varchar(255) [not null]
+  Note: '''
+  CHECK(status IN ('active','archived'))
+  CHECK(start_date<end_date)
+  '''
+}
+
+Table app_user {
+  id bigserial [pk, increment, not null]
+  version bigint [not null, default: 0]
+  name varchar(255) [not null]
+  email varchar(255) [not null, unique]
+  password_hash varchar(255) [not null]
+  role varchar(255) [not null]
+  student_id bigint [unique]
+  teacher_id bigint [unique]
+  enabled boolean [not null, default: true]
+  Note: '''
+  CHECK(role IN ('ADMIN','TEACHER','STUDENT','STAFF'))
+  CHECK((role='STUDENT' AND student_id IS NOT NULL AND teacher_id IS NULL) OR (role='TEACHER' AND teacher_id IS NOT NULL AND student_id IS NULL) OR (role IN ('ADMIN','STAFF') AND student_id IS NULL AND teacher_id IS NULL))
+  Unique functional index on lower(email); enforced in PostgreSQL, not represented as a plain DBML column index.
+  Required User entity. Role/student/teacher linkage CHECK must remain in SQL; STUFF maps to STAFF.
+  '''
+}
+
+Table lesson {
+  id bigserial [pk, increment, not null]
+  version bigint [not null, default: 0]
+  lesson_date date [not null]
+  start_time time [not null]
+  end_time time [not null]
+  semester_id bigint [not null]
+  group_id bigint [not null]
+  subject_id bigint [not null]
+  teacher_id bigint [not null]
+  room_id bigint [not null]
+  topic varchar(255)
+  status varchar(255) [not null]
+  indexes {
+    (teacher_id,lesson_date) [name: 'lesson_teacher_date']
+  }
+  Note: '''
+  CHECK(status IN ('scheduled','conducted','cancelled'))
+  CHECK(start_time<end_time)
+  btree_gist extension. teacher_overlap, room_overlap, group_overlap: EXCLUDE USING gist (resource_id WITH =, tsrange(lesson_date+start_time,lesson_date+end_time,'[)') WITH &&), WHERE status <> 'cancelled'. Adjacent intervals do not overlap. Constraints are defined in SQL, not approximated as UNIQUE.
+  '''
+}
+
+Table attendance {
+  id bigserial [pk, increment, not null]
+  version bigint [not null, default: 0]
+  student_id bigint [not null]
+  lesson_id bigint [not null]
+  status varchar(255) [not null]
+  updated_at timestamptz [not null]
+  indexes {
+    (student_id,lesson_id) [unique]
+    (lesson_id) [name: 'attendance_lesson']
+  }
+  Note: '''
+  CHECK(status IN ('present','late','absent','excused'))
+  '''
+}
+
+Table grade {
+  id bigserial [pk, increment, not null]
+  version bigint [not null, default: 0]
+  student_id bigint [not null]
+  lesson_id bigint [not null]
+  type varchar(255) [not null]
+  score integer [not null]
+  updated_at timestamptz [not null]
+  indexes {
+    (student_id,lesson_id,type) [unique]
+    (student_id) [name: 'grade_student']
+  }
+  Note: '''
+  CHECK(type IN ('Текущая','Рубежная','Итоговая'))
+  CHECK(score BETWEEN 0 AND 100)
+  '''
+}
+
+Table lesson_review {
+  id bigserial [pk, increment, not null]
+  version bigint [not null, default: 0]
+  lesson_id bigint [not null]
+  reviewer_id bigint [not null]
+  result varchar(255) [not null]
+  note varchar(2000) [not null]
+  updated_at timestamptz [not null]
+  Note: '''
+  CHECK(result IN ('confirmed','issue','pending'))
+  Additional entity for customer clarification U-04: staff supervision of teachers.
+  '''
+}
+
+Table audit_event {
+  id bigserial [pk, increment, not null]
+  version bigint [not null, default: 0]
+  at timestamptz [not null]
+  actor varchar(255) [not null]
+  action varchar(255) [not null]
+  entity varchar(255) [not null]
+  description varchar(2000) [not null]
+  indexes {
+    (at) [name: 'audit_at']
+  }
+  Note: '''
+  Additional implementation entity for the audit required by TZ. No plaintext passwords or bearer tokens.
+  '''
+}
+
+Table access_session {
+  id bigserial [pk, increment, not null]
+  version bigint [not null, default: 0]
+  token_hash varchar(255) [not null, unique]
+  user_id bigint [not null]
+  expires_at timestamptz [not null]
+  Note: '''
+  Additional implementation entity: SHA-256 token hash, expiry, user FK ON DELETE CASCADE. No plaintext token.
+  '''
+}
+
+Ref: teacher_subject.teacher_id > teacher.id
+Ref: teacher_subject.subject_id > subject.id
+Ref: study_group.curator_id > teacher.id
+Ref: group_subject.group_id > study_group.id
+Ref: group_subject.subject_id > subject.id
+Ref: student.group_id > study_group.id
+Ref: app_user.student_id - student.id
+Ref: app_user.teacher_id - teacher.id
+Ref: lesson.semester_id > semester.id
+Ref: lesson.group_id > study_group.id
+Ref: lesson.subject_id > subject.id
+Ref: lesson.teacher_id > teacher.id
+Ref: lesson.room_id > room.id
+Ref: attendance.student_id > student.id
+Ref: attendance.lesson_id > lesson.id
+Ref: grade.student_id > student.id
+Ref: grade.lesson_id > lesson.id
+Ref: lesson_review.lesson_id > lesson.id
+Ref: lesson_review.reviewer_id > app_user.id
+Ref: access_session.user_id > app_user.id [delete: cascade]

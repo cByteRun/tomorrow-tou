@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?><?import javafx.scene.layout.*?><?import javafx.geometry.Insets?>
+<SplitPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.tou.welcome.WelcomeController" fx:id="split" dividerPositions="0.60" styleClass="welcome">
+ <items>
+  <ScrollPane fx:id="storyScroll" fitToWidth="true" hbarPolicy="NEVER" styleClass="story-scroll"><content><VBox fx:id="story" styleClass="story"/></content></ScrollPane>
+  <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="rail-scroll"><content><VBox fx:id="rail" styleClass="login-rail" spacing="22">
+   <padding><Insets top="35" right="55" bottom="25" left="55"/></padding>
+   <HBox alignment="CENTER_LEFT"><Label text="Toraighyrov University" styleClass="rail-small"/><Region HBox.hgrow="ALWAYS"/><Hyperlink text="О платформе ↙" onAction="#about"/></HBox>
+   <Region VBox.vgrow="ALWAYS"/>
+   <VBox spacing="12">
+    <Label text="ВАШЕ МЕСТО В СИСТЕМЕ" styleClass="rail-kicker"/><Label text="Добро пожаловать." styleClass="login-title"/>
+    <Label fx:id="caption" text="Расписание, занятия и ваши отметки — рядом." wrapText="true" styleClass="rail-caption"/>
+    <FlowPane fx:id="roles" hgap="4" vgap="4" styleClass="roles"/>
+    <Label text="Университетская почта" styleClass="field-label"/><TextField fx:id="email" promptText="name@tou.edu.kz"/>
+    <Label text="Пароль" styleClass="field-label"/>
+    <HBox spacing="6" alignment="CENTER_LEFT"><StackPane HBox.hgrow="ALWAYS"><PasswordField fx:id="password" promptText="Введите пароль"/><TextField fx:id="plainPassword" promptText="Введите пароль" visible="false" managed="false"/></StackPane><Button fx:id="showPassword" text="Показать" onAction="#togglePassword" styleClass="show-password"/></HBox>
+    <HBox alignment="CENTER_LEFT"><CheckBox fx:id="remember" text="Запомнить меня"/><Region HBox.hgrow="ALWAYS"/><Hyperlink text="Забыли пароль?" onAction="#help"/></HBox>
+    <Label fx:id="error" wrapText="true" styleClass="login-error" visible="false" managed="false"/>
+    <Button fx:id="login" text="Войти как студент                         ↗" onAction="#login" maxWidth="Infinity" defaultButton="true" styleClass="submit"/>
+    <HBox alignment="CENTER" spacing="10"><Separator HBox.hgrow="ALWAYS"/><Label text="или познакомьтесь с платформой" styleClass="rail-small"/><Separator HBox.hgrow="ALWAYS"/></HBox>
+    <Button fx:id="demoButton" text="Открыть демонстрационный кабинет ↗" onAction="#demo" maxWidth="Infinity" styleClass="demo-button"/>
+    <Label text="Демонстрационные аккаунты работают через API.&#10;Учётные данные можно изменить перед входом." wrapText="true" styleClass="rail-note"/>
+   </VBox>
+   <Region VBox.vgrow="ALWAYS"/>
+   <Separator/><HBox alignment="CENTER_LEFT"><Label text="● Один университет. Один процесс." styleClass="rail-small"/><Region HBox.hgrow="ALWAYS"/><Label fx:id="progress" text="━ ─ ─" styleClass="rail-small"/></HBox>
+  </VBox></content></ScrollPane>
+ </items>
+</SplitPane>
